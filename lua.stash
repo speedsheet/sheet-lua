@@ -1,0 +1,2062 @@
+<meta>index tags<>
+# <#>Lua<> SpeedSheet
+<meta>index none<>
+
+<m>Work in progress. This is under development and is missing many important features.<>
+
+Lua is a lightweight, efficient scripting language.
+
+It supports dynamic typing, oop, functions.
+
+Embedding:
+Its simple nature allows it to be embedded in other environments.
+
+Speed:
+Its simplicity and its close connection to C allows it to execute fast.
+
+
+
+# Online Documents
+@
+@ online-docs-only, docs-only
+
+
+### Official Site
+<l>https://www.lua.org/<>
+
+
+### Official Documents
+<l>https://www.lua.org/docs.html<>
+
+
+### Official Reference
+<l>https://www.lua.org/manual/5.4/<>
+
+Version 5.4 released in 2023
+
+
+### Official Downloads
+<l>https://www.lua.org/download.html<>
+@
+@ install
+
+
+
+# Hello World
+
+
+### Hello World - Basic
+
+File Name:
+
+<cb><v>hello<>.lua<>
+
+Code:
+
+<cb>print("<v>Hello, World!<>")<>
+
+Run:
+
+<cb>lua <v>hello<>.lua<>
+
+
+
+### Hello World - Using Standard Input
+
+File:
+
+<cb><v>hello<>.lua<>
+
+Contents:
+
+<cb>print("Enter Your Name:")
+<v>name<> = io.read()
+
+print("Hello, " .. <v>name<> .. "!")<>
+
+Run:
+
+<cb>lua <v>hello<>.lua<>
+
+
+
+### Hello World - Using Command Arguments
+
+File:
+
+<cb><v>hello<>.lua<>
+
+Contents:
+
+<cb>if #arg == 0 then
+    print("Usage: hello \<name>")
+    os.exit()
+end
+
+local name = table.concat(arg, " ")
+print("Hello, " .. name .. "!")<>
+
+Run:
+
+<cb>lua <v>hello<>.lua<>
+
+
+
+### Hello World - Advanced
+
+<cb><#>-- Define User:<>
+
+local <v>user<> = {
+	<v>name<> = "",
+	<v>age<> = 0,
+}
+
+function <v>user<>.<v>hello<>()
+	print("Hello " .. <v>user<>.<v>name<> .. " age " .. <v>user<>.<v>age<> .. "!")
+end
+
+
+<#>-- Main Section:<>
+
+print("Enter your name and age.")
+
+io.write("Name: ")
+<v>user<>.<v>name<> = io.read()
+
+io.write("Age: ")
+<v>user<>.<v>age<> = tonumber(io.read())
+
+if #<v>user<>.<v>name<> > 0 and <v>user<>.<v>age<> then
+	<v>user<>.<v>hello<>()
+end<>
+
+
+
+
+# Install
+@
+@ install-only
+
+
+### Install - MacOS HomeBrew
+
+<cb>brew install lua<>
+
+
+
+
+# Fundamentals
+@
+@ fundamentals-only
+
+
+
+### Functions - 1st Class
+
+Supports first class functions.
+@
+@ supports first
+
+
+
+### Comments
+
+<cb><#>-- Comment<><>
+
+Start comments with <c>--<>.
+@
+@ --
+
+
+
+### Comments - Multiline
+
+<cb><#>--[[
+Multiline
+	comment
+]]<><>
+
+Create multiline comments between <c>--[[<> and <c>]]<>.
+@
+@ --[[, ]]
+
+
+
+### File Extension
+
+<cb><v>file1<>.lua<>
+
+
+Use .lua for script names.
+
+
+
+### Indexing
+
+Indexes are <b>1<> based!
+@
+@ indexes base
+
+
+
+### Scope / Default
+
+Default scope is global.
+
+
+
+# Commands
+@
+@ command-line, cli
+
+
+### Lua - CLI - Start
+
+<cb>lua<>
+
+Starts the Lua command line interface.
+@
+@ command line interface, cli
+
+
+
+### Lua Script - Run
+
+<cb>lua <v>script_file<><>
+
+Runs a lua script.
+
+
+
+# Operators
+@
+@ Operators, Operations, Expressions
+@ operators-only
+
+
+## Arithmetic Operators
+
+<in><t><c><v>a<> + <v>b<><>    <|>Add
+<c><v>a<> - <v>b<><><|>Subtract
+<c><v>a<> * <v>b<><><|>Multiply
+<c><v>a<> / <v>b<><><|>Divide
+<c><v>a<> % <v>b<><><|>Modulo / Remainder
+<c><v>a<> ^ <v>b<><><|>Exponent / Power of<>
+@
+@ +, -, *, /, %, ^
+@ add, plus, subtract, minus, multiply, divide, modulo, modulus, to the power of, exponent
+
+
+
+## Bitwise Operators
+
+<in><t><c>!<v>a<><><|>Bitwise Not / Invert
+
+<c><v>a<> & <v>b<><><|>Bitwise AND
+<c><v>a<> | <v>b<><><|>Bitwise OR
+<c><v>a<> ~ <v>b<><><|>Bitwise XOR
+
+<c><v>a<> \<\< <v>shift_count<><><|>Bitwise Shift Left
+<c><v>a<> >> <v>shift_count<><><|>Bitwise Shift Right<><>
+@
+@ !, &, |, ^, \<\<, >>, binary
+@ shift left, shift right
+
+
+
+## Comparison Operators
+
+<in><t><c><v>a<> == <v>b<><>     <|>Equals
+<c><v>a<> ~= <v>b<><><|>Not Equals
+<c><v>a<> > <v>b<><><|>Greater Than
+<c><v>a<> \< <v>b<><><|>Less Than
+<c><v>a<> >= <v>b<><><|>Greater Than or Equals
+<c><v>a<> \<= <v>b<><><|>Less Than or Equals<><>
+@
+@ Boolean, ==, ~=, \<>, \<, \<=, >, >/
+@ less than, greater than, less that or equal, greater than or equal, compare, tilde
+
+
+
+## Logical Operators
+
+<in><table><col><c>not <v>a<><><><col>Not<>
+<col> <>
+<col><c><v>a<> and <v>b<><><><col>And<>
+<col><c><v>a<> or <v>b<><><><col>Or<><><>
+@
+@ Boolean, !, &&, ||
+@ and, or, not, negation, bang
+
+
+
+## Ternary Operator
+
+<cb>= <v>condition<> and <v>true_value<> or <v>false_value<><>
+
+
+Evaluates a conditional expression and returns one value if true, and the other if false.
+@
+@ ternary conditional operator, tertiary, expression
+@ inline if, iif, and, or
+@ ternary-only
+
+
+
+# Control Structures
+@
+@ statements, flow
+@ control-only, control-structure-only, control-structures-only
+@ control-statements-only
+
+
+## Control Structures - Basics
+
+<t>If Else		<||><c>if <v>condition<> then
+	<v>...<>
+end<><>
+
+
+ <||><c>if <v>condition<> then
+	<v>...<>
+elseif <v>condition<> then
+	<v>...<>
+else
+	<v>...<>
+end<><>
+
+
+For<||><c>for <v>index<> = <v>start<>, <v>end<> do
+	<v>...<>
+end<><>
+
+
+ <||><c>for <v>index<> = <v>start<>, <v>end<>, <v>delta<> do
+	<v>...<>
+end<><>
+
+
+For Over Array<||><c>for <v>index<>, <v>value<> in ipairs(<v>table_1<>) do
+	<v>...<>
+end<><>
+
+
+For Over Key, Values<||><c>for <v>key<>, <v>value<> in pairs(<v>table_1<>) do
+	<v>...<>
+end<><>
+
+
+Repeat<||><c>repeat
+	<v>...<>
+until <v>condition<><><>
+
+
+While<||><c>while <v>condition<> do
+	<v>...<>
+end<><>
+
+
+Break<||><c>for do | repeat | while do
+	<v>...<>
+	break
+	<v>...<>
+end | until<><><>
+
+
+
+## If Else
+
+<cb>if <v>condition<> then
+	<v>...<>
+end<>
+
+
+<cb>if <v>condition<> then
+	<v>...<>
+elseif <v>condition<> then
+	<v>...<>
+else
+	<v>...<>
+end<>
+
+
+Defines an if else block.
+@
+@ if, elseif, else, end
+@ else, if-only, if-else, if-else-only
+
+
+
+## For
+@
+@ for-only, loop, end, do
+
+
+### For - Integer Range
+
+<cb>for <v>index<> = <v>start<>, <v>end<> do
+	<v>...<>
+end<><>
+
+
+
+### For - Integer Range with Step
+
+<cb>for <v>index<> = <v>start<>, <v>end<>, <v>delta<> do
+	<v>...<>
+end<><>
+
+
+
+### For - Iterate over Array Table
+
+<cb>for <v>index<>, <v>value<> in ipairs(<v>table_1<>) do
+	<v>...<>
+end<>
+
+
+Iterates over the items in a table.
+
+The index is always returned as a number.
+@
+@ ipairs(), each, over collection
+
+
+
+### For - Iterate over Key Value Table
+
+<cb>for <v>key<>, <v>value<> in pairs(<v>table_1<>) do
+	<v>...<>
+end<>
+
+
+Iterates over the key values in a table.
+
+The key is returned in whatever type the original key was.
+@
+@ pairs(), each, over collection
+
+
+
+### For - Break
+
+<cb>break<>
+
+Usage:
+
+<cb>for <v>...<> do
+	break
+end<>
+
+
+Breaks from a for loop.
+
+
+
+## Repeat Until
+@
+@ repeat-only, repeat-until-only
+
+
+### Repeat Until
+
+<cb>repeat
+	<v>...<>
+until <v>condition<><><>
+
+
+Repeats until a condition is true.
+
+
+
+### Repeat Until - Break
+
+<cb>break<>
+
+Usage:
+
+<cb>repeat
+	break
+until <v>condition<><>
+
+
+Breaks out of a repeat until block.
+
+
+
+## While
+@
+@ while-only, do, end
+
+
+### While
+
+<cb>while <v>condition<> do
+	<v>...<>
+end<>
+
+
+
+### While - Break
+
+<cb>break<>
+
+Usage:
+
+<cb>while <v>condition<> do
+	break
+end<>
+
+
+Breaks out of a while block.
+
+
+
+# Literals
+@
+@ literals-only, lit-only, literal-only
+
+
+## Literals - Basic
+
+<t>Nil<|><c>= nil<>
+
+Boolean<|><c>= true | false<>
+
+Number<|><c>= <v>42<><>
+Number<|><c>= <v>3.14<><>
+Number<|><c>= <v>1.2345<>e<v>2<><>
+Number<|><c>= 0x2A<v>
+
+String<|><c>= '<v>A String<>'<>
+String<|><c>= "<v>A String<>"<>
+String<|><{}><c>= [[<v>A Multiline
+String<>]]<><>
+
+Table<|><c>= {}<>
+Table<|><c>= {<v>value_1<>, <v>value_2<>, <v>value_3<>}<>
+Table<|><c>= {<v>key_1<> = <v>value_1<>, <v>key_1<> = <v>value_2<>, <v>...<>}<><>
+
+
+## Literals - Detail
+
+
+### Boolean Literal
+
+<cb>= true<>
+
+<cb>= false<>
+
+Returns
+
+<cb>boolean<>
+
+
+Defines a boolean.
+@
+@ bools, true, false
+
+
+
+### Nil Literal
+
+<cb>= nil<>
+
+Returns:
+
+<cb>nil<>
+
+
+Defines the nil type and nil value.
+
+
+
+### Number Literal - Integer
+
+<cb>= <v>42<><>
+
+Returns:
+
+<cb>number<>
+
+
+Defines a number.
+
+Doesn't matter if integer or float, always returns as number.
+
+
+
+### Number Literal - Floating Point
+
+<cb>= <v>3.14<><>
+
+Returns:
+
+<cb>number<>
+
+
+Defines a number.
+
+Doesn't matter if integer or float, always returns as number.
+
+
+
+### Number Literal - Hexadecimal
+
+<cb>= 0x<v>FFFF<><>
+
+Returns:
+
+<cb>number<>
+
+
+Defines a number from a hex value.
+@
+@ 0x
+
+
+
+### Number Literal - Scientific Notation
+
+<cb>= <v>1.234<>e<v>2<><>
+
+Returns:
+
+<cb>number<>
+
+
+Defines a number using scientific notation
+@
+@ e
+
+
+
+### String Literal
+
+<cb>= '<v>A String<>'<>
+
+Returns:
+
+<cb>string<>
+
+
+Defines a string.
+@
+@ ''
+
+
+
+### String Literal
+
+<cb>= "<v>A String<>"<>
+
+Returns:
+
+<cb>string<>
+
+
+Defines a string.
+@
+@ ""
+
+
+
+### String Literal - Multiline
+
+<cb>= [[<v>A Multline
+String<>]]<>
+
+Returns:
+
+<cb>string<>
+
+
+Defines a multiline string.
+@
+@ [[]]
+
+
+
+### Table Literal - Empty Table
+
+<cb>= {}<>
+
+Returns:
+
+<cb>table<>
+
+
+Defines an empty table.
+@
+@ {}
+
+
+
+### Table Literal - Table of Values
+
+<cb>= {<v>value_1<>, <v>value_2<>, <v>value_3<>}<>
+
+Returns:
+
+<cb>table<>
+
+
+Defines a table of values indexed from 1.
+@
+@ {}
+
+
+
+### Table Literal - Table of Key, Values
+
+<cb>= {<v>key_1<> = <v>value_1<>, <v>key_2<> = <v>value_2<>, <v>key_3<> = <v>value_3<>}<>
+
+Returns:
+
+<cb>table<>
+
+
+Defines a table of key values.
+@
+@ {}
+
+
+
+# Variables
+<m>-- Add Details --<>
+@
+@ vars-only, var-only, variable-only, variables-only, assignment
+
+
+## Variable - Declare
+@
+@ define, assign
+
+
+### Variable - Declare Global
+
+<cb><v>value_1<> = 1<>
+
+
+Declares a global variable.
+
+All values are global by default
+
+
+
+### Variable - Declare Local
+
+<cb>local <v>value_1<> = 1<>
+
+
+Declares a local variable.
+
+Local requires <c>local<> keyword.
+
+
+## Variable - Properties
+
+
+### Variable - Get Type
+
+<cb>= type(<v>value_1<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Returns the type of variable.
+
+Returns one of:
+<c><*>nil
+boolean
+number
+string
+table<><>
+
+
+
+# Data Types
+<m>-- Add Details --<>
+@
+@ standard, builtin, data-types-only
+
+<t>String<|><c>"A String"<>
+Number<|><c>3.14159<>
+Boolean<|><c>true<>
+
+Nil<|><c>nil<>
+
+Table<|><c>{ <v>...<> }<>
+
+Function<|><c>= function() <v>...<> end<>
+
+Coroutine<|><c>= coroutine.create(<v>action<>)<>
+
+User Data<|><>
+
+
+
+# Boolean
+
+<cb>= true | false<>
+
+A boolean value.
+@
+@ true, false
+@ bool-only, bools-only, boolean-only, booleans-only
+
+
+
+# Nil
+
+<cb>= nil<>
+@
+@ null, nil-only
+
+
+# Number
+
+A floating point number.
+@
+@ num-only, number-only, numbers-only
+
+
+## Number - Define
+
+<cb>= <v>42<><>
+
+<cb>= <v>3.14<><>
+
+<cb>= 0x<v>FFFF<><>
+
+<cb>= <v>1.234<>e<v>2<><>
+
+Returns:
+
+<cb>number<>
+
+
+Defines a number.
+
+Doesn't matter if the literal is an integer or float, always returns as number.
+@
+@ create, instantiate
+
+
+
+## Number - Operations
+
+
+### Numbers - Maximum
+
+<cb>= <v>a<> > <v>b<> and <v>a<> or <v>b<><>
+
+
+Returns the greater of the two variables.
+@
+@ maximum value, greater
+
+
+
+### Numbers - Minimum
+
+<cb>= <v>a<> \< <v>b<> and <v>a<> or <v>b<><>
+
+
+Returns the lesser of the two variables.
+@
+@ minimum value, lesser
+
+
+
+## Number - Convert
+
+
+### Number - To Hexadecimal (Lower Case)
+
+<cb>= string.format("%x", <v>number_1<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Returns the hex version of a number in lower case.
+
+
+Example:
+
+<cb><v>hex<> = string.format("%x", 42)<>
+
+print(<v>hex<>)
+<#>-- Prints: 2a<><>
+@
+@ string.format, format(), %h
+
+
+
+### Number - To Hexadecimal (Lower Case)
+
+<cb>= string.format("%X", <v>number_1<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Returns the hex version of a number in upper case.
+
+
+Example:
+
+<cb><v>hex<> = string.format("%X", 42)<>
+
+print(<v>hex<>)
+<#>-- Prints: 2A<><>
+@
+@ string.format, format(), %h
+
+
+
+### Number - To String
+
+<cb>= tostring(<v>number_1<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Converts a number into a string.
+@
+@ tostring(), to-string
+
+
+
+# String
+
+<cb>= "A String"<>
+
+A string value.
+@
+@ string-only, strings-only
+
+
+
+## String - Properties
+
+
+### String - Compare
+
+Is Less Than?:
+
+<cb>= <v>string_1<> \< <v>string_2<><>
+
+Is Greater Than?:
+
+<cb>= <v>string_1<> > <v>string_2<><>
+
+
+Compare strings using ==, ~=, \<, >, \<=, >=.
+@
+@ is less than, is greater than, is equal, or equal, not equal, equals
+@ ==, ~=, \<, >, \<=, >=
+
+
+
+### String - Contains?
+
+<cb>= <v>string_1<>:find(<v>match_string<>) ~= nil<>
+
+Returns:
+
+<cb>boolean<>
+
+
+Returns true if the string contains the match string.
+
+
+
+### String - Is Blank?
+
+<cb>= <v>string_1<>:match("^%s*$") ~= nil<>
+
+Returns:
+
+<cb>Boolean<>
+
+
+Returns true if the string is empty or contains only whitespace.
+@
+@ whitespaces, white spaces
+
+
+
+### String - Is Empty?
+
+<cb>= <v>string_1<> == ""<>
+
+Returns:
+
+<cb>Boolean<>
+
+
+Returns true if the string is empty.
+
+
+
+### String - Is Equal?
+
+<cb>= <v>string_1<> == <v>string_2<>
+
+Returns:
+
+<cb>Boolean<>
+
+
+Returns true if both strings are the same.
+@
+@ is equal, equals, compare, identity
+@ ==
+
+
+
+### String - Not Equal?
+
+<cb>= <v>string_1<> ~= <v>string_2<>
+
+Returns:
+
+<cb>Boolean<>
+
+
+Returns true if both strings are the same.
+@
+@ is equal, equals, compare, not, identity
+@ ~=
+
+
+
+### String - Is Equal, Ignore Case?
+
+<cb>= <v>string_1<>:lower() == <v>string_2<>:lower()
+
+Returns:
+
+<cb>Boolean<>
+
+
+Returns true if both strings are the same.
+@
+@ is equal, equals, compare, identity
+@ ==
+
+
+
+### String - Not Equal, Ignore Case?
+
+<cb>= <v>string_1<>:lower() ~= <v>string_2<>:lower()
+
+Returns:
+
+<cb>Boolean<>
+
+
+Returns true if both strings are the same.
+@
+@ is equal, equals, compare, not, identity
+@ ~=
+
+
+
+### String - Length
+
+<cb>= #<v>string_1<><>
+
+Returns:
+
+<cb>number<>
+
+
+Returns the length of the string.
+
+
+Example:
+
+<cb>local <v>string1<> = "12345"
+
+print(#<v>string1<>)
+<#>-- Prints: 5<><>
+@
+@ #
+@ size, count, length
+
+
+
+### String - Substring - Left
+
+<cb>= <v>string_1<>:sub(1, <v>count<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Returns the left side of the string.
+
+
+Example:
+
+<cb>local <v>string1<> = "12345"
+
+<v>left<> = <v>string1<>:sub(1, 3)
+
+print(<v>left<>)
+<#>-- Prints: 123<><>
+@
+@ Start, Beginning, slice, partial
+@ string:sub(), sub()
+
+
+
+### String - Substring - Left - Counting From Right
+
+<cb>= <v>string_1<>:sub(1, -<v>count_from_right<> - 1)<>
+
+Returns:
+
+<cb>string<>
+
+
+Returns the left side of the string counting from the right.
+
+
+Example:
+
+<cb>local <v>string1<> = "12345"
+
+<v>left<> = <v>string1<>:sub(1, -3) <#>-- -2 - 1<>
+
+print(<v>left<>)
+<#>-- Prints: 123<><>
+@
+@ Start, Beginning, slice, partial
+@ string:sub(), sub()
+
+
+
+### String - Substring - Middle
+
+<cb>= <v>string_1<>:sub(<v>start_index<>, <v>end_index<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Returns the left side of the string.
+
+
+Example:
+
+<cb>local <v>string1<> = "12345"
+
+<v>middle<> = <v>string1<>:sub(2, 4)
+
+print(<v>middle<>)
+<#>-- Prints: 234<><>
+@
+@ Start, Beginning, slice, partial
+@ string:sub(), sub()
+
+
+
+### String - Substring - Right
+
+<cb>= <v>string_1<>:sub(<v>starting_index<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Returns the right side of the string.
+
+
+Example:
+
+<cb>local <v>string1<> = "12345"
+
+<v>right<> = <v>string1<>:sub(4)
+
+print(<v>right<>)
+<#>-- Prints: 45<><>
+@
+@ Last, End, slice, partial
+@ string:sub(), sub()
+
+
+
+### String - Substring - Right - Counting From Right
+
+<cb>= <v>string_1<>:sub(-<v>count_from_right<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Returns the right side of the string.
+
+
+Example:
+
+<cb>local <v>string1<> = "12345"
+
+<v>right<> = <v>string1<>:sub(-2) 
+
+print(<v>right<>)
+<#>-- Prints: 45<><>
+@
+@ Last, End, slice, partial
+@ string:sub(), sub()
+
+
+
+## String - Operations
+
+
+### String - Concatenate
+
+<cb>= <v>string_1<> .. <v>string_2<><>
+
+Concatenates two strings together.
+@
+@ join to, concatenating, merge, +, ..
+
+
+### String - Find
+
+<cb>= <v>string_1<>:find(<v>match_string<>)<>
+
+Returns:
+
+<cb>number<>
+
+
+Returns the starting location of the match string.
+
+Returns nil if no match found.
+@
+@ subtring, search, index of, position, start
+@ string:find(), find()
+
+
+
+### String - Get Character
+
+<cb>= <v>string_1<>:sub(<v>char_position<>, <v>char_position<>)<>
+
+Returns:
+
+<cb>String<>
+
+
+Returns the character at the given position.
+
+
+Example:
+
+<cb>local <v>string1<> = "12345"
+
+<v>third<> = <v>string1<>:sub(3, 3) 
+
+print(<v>third<>)
+<#>-- Prints: 3<><>
+@
+@ string:sub(), sub()
+
+
+
+### String - Pad Left
+
+<cb>= string.rep(" ", <v>total_length<> - #<v>string_1<>) .. <v>string_1<><>
+
+Returns:
+
+<cb>string<>
+
+
+Pads a string on the left side with spaces.
+@
+@ align right, right justify, format
+@ pad-left, justify-right, right-justify, align-right, right-align
+
+
+
+### String - Pad Left - With Fill Character
+
+<cb>= string.rep(<v>fill_char<>, <v>total_length<> - #<v>string_1<>) .. <v>string_1<><>
+
+Returns:
+
+<cb>string<>
+
+
+Pads a string on the left side with spaces.
+@
+@ align right, right justify, format
+@ pad-left, justify-right, right-justify, align-right, right-align
+
+
+
+### String - Pad Right
+
+<cb>= <v>string_1<> .. string.rep(" ", <v>total_length<> - #<v>string_1<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Pads a string on the right side with spaces.
+@
+@ align left, left justify, string, format
+@ pad-right, justify-left, left-justify, left-right, left-align
+
+
+
+### String - Pad Right - With Fill Character
+
+<cb>= <v>string_1<> .. string.rep(<v>fill_char<>, <v>total_length<> - #<v>string_1<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Pads a string on the right side with the fill character.
+@
+@ align left, left justify, string, format
+@ pad-right, justify-left, left-justify, left-right, left-align
+
+
+
+### String - Remove Prefix
+
+<cb>= <v>string_1<>:gsub("^" .. <v>prefix<>, "")<>
+
+Returns:
+
+<cb>string<>
+
+
+Removes the prefix of the string if found.
+
+Otherwise returns the original string.
+@
+@ delete, start, leading, beginning, starting, strip
+@ string:gsub(), gsub()
+
+
+
+### String - Remove Suffix
+
+<cb>= <v>string_1<>:gsub(<v>suffix<> .. "$", "")<>
+
+Returns:
+
+<cb>string<>
+
+
+Removes the suffix of the string if found.
+
+Otherwise returns the original string.
+@
+@ end, delete, ending, strip, postfix
+@ string:gsub(), gsub()
+
+
+
+### String - Repeat
+
+<cb>= string.rep(<v>string_1<>, <v>count<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Repeats a string a number of times.
+@
+@ string.rep(), rep(), string.repeat(), repeat()
+
+
+
+### String - Reverse
+
+<cb>= <v>string_1<>:reverse()<>
+
+Returns:
+
+<cb>string<>
+
+
+Reverses a string.
+@
+@ string:reverse(), reverse()
+
+
+
+### String - Trim
+
+<cb>= <v>string_1<>:match("^%s*(.-)%s*$")<>
+
+Returns:
+
+<cb>string<>
+
+
+Trims leading and trailing whitespaces from the string.
+@
+@ strip, remove, delete, whitespaces, white spaces
+
+
+
+### String - Trim Left
+
+<cb>= <v>string_1<>:gsub("^%s*", "")<>
+
+Returns:
+
+<cb>string<>
+
+
+Trims leading whitespaces from the string.
+@
+@ strip, remove, delete, whitespaces, white spaces, starting, left, leading
+
+
+
+### String - Trim Right
+
+<cb>= <v>string_1<>:gsub("%s*$", "")<>
+
+Returns:
+
+<cb>string<>
+
+
+Trims trailing whitespaces from the string.
+@
+@ strip, remove, delete, whitespaces, white spaces, trailing, ending, right
+
+
+
+### Strings - Join
+
+<cb>= table.concat(<v>strings_1<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Joins a list of strings together into one string.
+
+
+Example:
+
+<cb>local <v>strings_1<> = {"one", "two", "three"}
+
+<v>joined<> = table.concat(<v>strings_1<>)
+
+print(<v>joined<>)
+
+<#>-- Prints: onetwothree<><>
+
+
+Lua Docs: <l "https://www.lua.org/manual/5.4/manual.html">Manual<> - <l "https://www.lua.org/manual/5.4/manual.html#6.6">Table Manipulation<>
+@
+@ concatenate
+@ table.concat(), .concat()
+
+
+
+### Strings - Join - With Separator
+
+<cb>= table.concat(<v>strings_1<>, <v>separator<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Joins a list of strings together into one string.
+
+
+Example:
+
+<cb>local <v>strings_1<> = {"one", "two", "three"}
+
+<v>joined<> = table.concat(<v>strings_1<>, ", ")
+
+print(<v>joined<>)
+
+<#>-- Prints: one, two, three<><>
+
+
+Lua Docs: <l "https://www.lua.org/manual/5.4/manual.html">Manual<> - <l "https://www.lua.org/manual/5.4/manual.html#6.6">Table Manipulation<>
+@
+@ concatenate
+@ table.concat(), .concat()
+
+
+
+## String - Convert
+@
+@ from, convert, conversion, converting
+@ from string, string-to, string-into, into
+
+
+### Any - To String
+
+<cb>= tostring(<v>var_1<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Converts any standard type into a string.
+@
+@ tostring(), to-string, into-string
+
+
+
+### String - To Lower Case
+
+<cb>= <v>string_1<>:lower()<>
+
+Returns:
+
+<cb>string<>
+
+
+Converts a string to lower case.
+@
+@ lowercase
+@ string:lower(), lower()
+
+
+
+### String - To Title Case
+
+<cb>= <v>string_1<>:gsub("(%a)([%w']*)", function(first, rest) return first:upper() .. rest:lower() end)<>
+
+Returns:
+
+<cb>string<>
+
+
+Converts a string to title case.
+@
+@ uppercase
+@ string:title(), title()
+
+
+
+### String - To Upper Case
+
+<cb>= <v>string_1<>:upper()<>
+
+Returns:
+
+<cb>string<>
+
+
+Converts a string to upper case.
+@
+@ uppercase
+@ string:upper(), upper()
+
+
+
+### String - To Number
+
+<cb>= tonumber(<v>text_1<>)<>
+
+Returns:
+
+<cb>string<>
+
+
+Converts a string into a number.
+@
+@ tonumber()
+
+
+
+# Table (List)
+
+## Table - Basics
+
+<cb><v>table_1<> = { <v>value1<>, <v>value2<>, <v>value3<> }<>
+
+
+
+# Table (Map)
+@
+@ table-only, tables-only
+
+
+## Table - Basics
+
+<cb><v>table_1<> = {
+	<v>field_1<> = <v>value<>
+}
+
+function <v>table_1<>.<v>function_1<>()
+	<v>...<>
+end<>
+
+<cb>= <v>table_1<>.<v>field_1<><>
+
+<cb><v>table_1<>.<v>field_1<> = <v>...<><>
+
+<cb>= <v>table_1<>.<v>function_1<>()<>
+
+
+
+# User Data
+
+Used to communicate with C subroutines.
+@
+@ user-data-only, userdata-only
+
+
+
+# Functions
+@
+@ fn, fns, fn-only, fns-only
+@ funcs, func-only, funcs-only
+@ fuctions, function-only, functions-only
+
+<cb>local <v>function_1<> = function()
+	<v>...<>
+end<>
+@
+@ end
+
+
+
+# Modules
+@
+@ mod-only, module-only, modules-only
+
+
+## Module Basics
+
+Module:
+
+<cb>local <v>module1<> = {}
+
+function <v>module1<>.<v>function1<>() {
+	<v>...<>
+}
+
+return <v>module1<><>
+
+Import:
+
+<cb>local <v>module1<> = require(<v>module_file<>)
+
+<v>module1<>.<v>function1<>()<><>
+
+
+
+## Module - Details
+
+
+### Module - require
+
+<cb>local <v>module1<> = require(<v>module_file<>)<>
+
+
+Imports the items in the file <v>module_file<>.lua.
+
+The <c>.lua<> extension is not required.
+@
+@ required()
+
+
+
+# How To
+@
+@ how-to-only
+
+
+### Command Line Arguments - Get
+
+<cb>= arg<>
+
+Returns:
+
+<cb>table<>
+
+
+Returns the command line arguments passed into the application.
+
+The first entry is the command name itself.
+@
+@ args, parameters
+
+
+
+### Command Line Arguments - Get Command Name
+
+<cb>= arg[0]<>
+
+Returns:
+
+<cb>string<>
+
+
+Returns the name of the command that was executed.
+@
+@ args, arg[0], parameters
+
+
+
+### Command Line Arguments - Get Arguments Only
+
+<cb>= {table.unpack(arg, 1)}<>
+
+Returns:
+
+<cb>table<>
+
+
+The command line arguments passed into the application without the actual command name (no arg[0]).
+@
+@ args, parameters
+
+
+### Input - Read
+
+<cb>= io.read()<>
+
+
+Reads from the console.
+@
+@ standard in, stdin
+@ io.read)()
+
+
+
+### Print
+
+<cb>print("<v>text<>")<>
+
+Prints the text to the console.
+
+Ends the print with a newline.
+@
+@ standard out, stdout
+@ print()
+
+
+
+### Print - Stay on Line
+
+<cb>io.write("<v>text<>")<>
+
+Prints the text to the console.
+
+Does NOT send a newline when done.
+@
+@ no newline
+@ standard out, stdout, no newline
+@ io.write()
+
+
+
+### Run Script - Using Bash Shebang
+
+<cb>#!/usr/bin/env lua<>
+
+Yes, you can put this at the top of your Lua script and Bash will run it correctly.
+@
+@ #!/usr/bin/env, /usr/bin/env, lua, zsh, sh, script
+
+
+
+### System - Exit
+
+<cb>os.exit()<>
+
+
+Exits the application.
+@
+@ end program, stop, quit, application, program, terminate
+@ os.exit(), .exit(), .quit()
+
+
+
+### System - Exit, Return Exit Code
+
+<cb>os.exit(<v>exit_code<>)<>
+
+
+Exits the application.
+@
+@ end program, stop, quit, application, program, terminate
+@ error code, status, number, 
+@ os.exit(), .exit(), .quit()
+
+
+
+# Reference - Symbols
+@
+@ symbols-only, symbol-only, sym-only
+
+
+### Symbol #
+Length Operator
+
+<cb>local <v>length<> = #<v>text_1<><>
+
+
+
+### Symbol ~=
+Not Equal To Operator
+
+
+<cb><v>a<> ~= <v>b<><>
+@
+@ tilde equals
+
+
+
+### Symbol --
+Comment
+
+<cb><#>-- A comment<><>
+
+
+
+### Symbol --[[ ]]
+Multiline Comment Start
+
+<cb><#>--[[
+	Multiline Comment
+]]<><>
+@
+@ square brackets
+
+
+
+### Symbol ..
+String Concatenation
+
+<cb><v>a<> .. <v>b<><>
+
+
+
+### Symbol ''
+A string
+
+<cb>='<v>a string<>'<>
+@
+@ single quote
+
+
+
+### Symbol ""
+A string
+
+<cb>="<v>a string<>"<>
+@
+@ double quotes
+
+
+
+### Symbol [[ ]]
+A multiline string
+
+<cb>=[[<v>A Multiline
+String<>]]<>
+@
+@ square brackets
+
+
+
+### Symbol {}
+Table Definition
+
+<cb>local <v>table_1<> = {
+	<v>field<> = <v>value<>
+}<>
+
+
+
+# Reserved Words
+
+A reserved word is a keyword that has special meaning or purpose to Rust.
+It can not be used as the name of variable, function or anything else.
+
+<in><c>and<>
+<c>break<>
+<c>do<>
+<c>else<>
+<c>elseif<>
+<c>end<>
+<c>false<>
+<c>for<>
+<c>function<>
+<c>if<>
+<c>in<>
+<c>local<>
+<c>nil<>
+<c>not<>
+<c>or<>
+<c>repeat<>
+<c>return<>
+<c>then<>
+<c>true<>
+<c>until<>
+<c>while<><>
+@
+@ and, break, do, else, elseif
+@ end, false, for, function, if
+@ in, local, nil, not, or
+@ repeat, return, then, true, until
+@ while
+@ keywords, key words
+@ reserved-words-only, reserved-only
+@ keyword-only, keywords-only, key-word-only
+
+
+
+# Reference - Coming From Other Languages
+
+
+### ++, -- Operators
+
+Not supported in Lua.
+
+Use Instead:
+
+<cb><v>a<> = <v>a<> + 1;
+<v>a<> = <v>a<> - 1;<>
+@
+@ increment, decrement
+
+
+### Arithmetic Assignment Operators
+
+Not supported in Lua.
+
+Not Supported:
+
+<in><t><c><v>a<> += <v>b<><>   <|>Add
+<c><v>a<> -= <v>b<><><|>Subtract
+<c><v>a<> *= <v>b<><><|>Multiply
+<c><v>a<> /= <v>b<><><|>Divide
+<c><v>a<> %= <v>b<><><|>Modulo / Remainder
+<c><v>a<> ^= <v>b<><><|>Exponent<><>
+
+Use Instead:
+
+<in><t><c><v>a<> = <v>a<> + <v>b<><>   <|>Add
+<c><v>a<> = <v>a<> - <v>b<><><|>Subtract
+<c><v>a<> = <v>a<> * <v>b<><><|>Multiply
+<c><v>a<> = <v>a<> / <v>b<><><|>Divide
+<c><v>a<> = <v>a<> % <v>b<><><|>Modulo / Remainder
+<c><v>a<> = <v>a<> ^ <v>b<><><|>Exponent<><>
+@
+@ +=, -=, *=, /=, %=, ^=
+
+
+
+### Array, List
+
+No arrays.
+
+Use: <l "?q=table-only">Table<>
+@
+@ arrays
+
+
+
+### Continue
+
+Not supported in LUA.
+
+You can not continue inside a for loop, repeat until block or while block.
+@
+@ statement
+
+
+
+### Dict
+
+Use: <l "?q=table-only">Table<>
+@
+@ dicts
+
+
+
+### List
+
+No lists.
+
+Use: <l "?q=table-only">Table<>
+@
+@ lists
+
+
+
+### Map
+
+Use: <l "?q=table-only">Table<>
+@
+@ maps, hashmaps
+
+
+
+### Null
+
+Use: <l "?q=nil-only">nil<>
+@
+@ nulls
+
+
+
+### Set
+
+No sets or hashsets types.
+
+Use: <l "?q=table-only">Table<>
+@
+@ sets, hashsets
+
+
+
+# Acronyms
+@
+@ acronym-only, acronyms-only
+
+
+# Terms
+@
+@ term-only, terms-only
+
+
+
+### Data Structures
+Data structures are implemented using the <l "?q=table-only">Table<> type.
+
+
